@@ -5,6 +5,8 @@ namespace DesafioProjetoHospedagem.Models
         public List<Pessoa> Hospedes { get; set; }
         public Suite Suite { get; set; }
         public Reserva() { }
+
+        // Retorna uma lista de hospedes
         public List<Pessoa> ObterHospedes()
         {
             return Hospedes;
