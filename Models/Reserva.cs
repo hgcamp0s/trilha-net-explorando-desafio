@@ -4,10 +4,11 @@ namespace DesafioProjetoHospedagem.Models
     {
         public List<Pessoa> Hospedes { get; set; }
         public Suite Suite { get; set; }
-        public int DiasReservados { get; set; }
-
         public Reserva() { }
-
+        public List<Pessoa> ObterHospedes()
+        {
+            return Hospedes;
+        }
         public void CadastrarHospedes(List<Pessoa> hospedes)
         {
             // Verifica se a capacidade é maior ou igual ao número de hóspedes sendo recebido
@@ -25,12 +26,6 @@ namespace DesafioProjetoHospedagem.Models
         public void CadastrarSuite(Suite suite)
         {
             Suite = suite;
-        }
-
-        public int ObterQuantidadeHospedes()
-        {
-            // Retorna a quantidade de hóspedes (propriedade Hospedes)
-            return Hospedes.Count;
         }
     }
 }

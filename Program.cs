@@ -71,7 +71,12 @@ while (!sair)
             }
             else
             {
-                Console.WriteLine($"Quantidade de hóspedes: {reserva.ObterQuantidadeHospedes()}");
+                hospedes = reserva.ObterHospedes();
+                Console.WriteLine("Hóspedes cadastrados:");
+                foreach (Pessoa hospede in reserva.Hospedes)
+                {
+                    Console.WriteLine(hospede.NomeCompleto);
+                }
             }
             Console.WriteLine();
             break;
