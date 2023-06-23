@@ -30,16 +30,14 @@ while (!sair)
             Console.WriteLine("Digite o nome do hóspede: ");
             string nomeHospede = Console.ReadLine();
 
+            Console.WriteLine("Digite o sobrenome do hóspede:");
+            string sobrenomeHospede = Console.ReadLine();
+
             Console.WriteLine("Digite a quantidade de dias reservados:");
             int diasReservados = int.Parse(Console.ReadLine());
 
-            Pessoa novoHospede = new Pessoa(nomeHospede);
+            Pessoa novoHospede = new Pessoa(nomeHospede, sobrenomeHospede, diasReservados);
             hospedes.Add(novoHospede);
-
-            if (reserva != null)
-            {
-                reserva.DiasReservados = diasReservados;
-            }
 
             Console.WriteLine("Hóspede cadastrado com sucesso!");
             Console.WriteLine();
@@ -53,7 +51,9 @@ while (!sair)
             Console.WriteLine("Digite o valor da diária da suíte: ");
             decimal valorDiaria = decimal.Parse(Console.ReadLine());
 
+            // Passa os dados cadastrados pelo usuário da nova 'suite'
             suite = new Suite(tipoSuite, capacidade, valorDiaria);
+
             // Cria uma nova reserva, passando a suíte e os hóspedes
             reserva = new Reserva();
             reserva.CadastrarSuite(suite);
@@ -83,7 +83,13 @@ while (!sair)
             }
             else
             {
-                Console.WriteLine($"Valor da diária: {reserva.CalcularValorDiaria().ToString("F2")}");
+                reserva.CadastrarHospedes(hospedes); // Certifica-se de que a lista de hóspedes está atualizada
+                
+                foreach (Pessoa hospede in reserva.Hospedes)
+                {
+                    decimal valorDiariaHospede = hospede.CalcularValorDiaria(suite.ValorDiaria);
+                    Console.WriteLine($"Valor total para {hospede.NomeCompleto}: {valorDiariaHospede.ToString("F2")}");
+                }
             }
             Console.WriteLine();
             break;
